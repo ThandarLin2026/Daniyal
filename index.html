@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +18,7 @@
 </head>
 <body class="bg-slate-900 text-slate-100 min-h-screen">
 
-  <!-- Success Center Modal Alert System (ဝက်ဘ်ဆိုက်အလယ်မှ ပေါ်လာမည့် Alert Box) -->
+  <!-- Success Center Modal Alert System -->
   <div id="successModal" class="fixed inset-0 z-50 items-center justify-center bg-slate-950/80 backdrop-blur-sm hidden transition-all duration-300">
     <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 max-w-md w-full mx-4 shadow-2xl relative text-center transform scale-95 transition-transform duration-300" id="modalCard">
       <!-- အောင်မြင်မှု အမှန်ခြစ်ပုံစံ -->
@@ -58,7 +59,7 @@
     </div>
   </div>
 
-  <!-- Toast Notification Alert System (ရိုးရိုး Error / Warning အကြောင်းကြားရန်) -->
+  <!-- Toast Notification Alert System -->
   <div id="toastContainer" class="fixed top-4 right-4 z-50 flex flex-col gap-3 max-w-sm w-full px-4"></div>
 
   <!-- Navigation Bar -->
@@ -79,8 +80,8 @@
             <i class="fa-solid fa-rotate-right"></i> Refresh
           </button>
           <div class="flex items-center gap-2 text-xs text-slate-400 bg-slate-950 px-3 py-1.5 rounded-full border border-slate-800">
-            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            Cloudflare API Active
+            <span id="connectionDot" class="w-2 h-2 rounded-full bg-slate-500 animate-pulse"></span>
+            <span id="connectionText">API Offline</span>
           </div>
         </div>
       </div>
@@ -90,11 +91,61 @@
   <!-- Main Container -->
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     
+    <!-- Step 1: Credentials Input Panel (ကုဒ်ထဲမှာ ထည့်မရေးထားဘဲ UI ကနေ ထည့်သွင်းခိုင်းခြင်း) -->
+    <div id="credentialsPanel" class="bg-slate-950 border border-slate-800 rounded-2xl p-6 mb-8 shadow-xl">
+      <div class="flex items-center justify-between mb-4">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-key text-orange-400"></i>
+          <h2 class="text-lg font-semibold">Cloudflare API ချိတ်ဆက်ရန်</h2>
+        </div>
+        <span class="text-xs bg-slate-800 text-slate-400 px-2.5 py-1 rounded-full border border-slate-700"><i class="fa-solid fa-user-shield mr-1"></i> Browser တွင် အမြဲသိမ်းဆည်းထားမည်</span>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-sm font-medium text-slate-400 mb-2">Cloudflare API Token (Edit DNS)</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-500">
+              <i class="fa-solid fa-shield-halved"></i>
+            </span>
+            <input type="password" id="apiToken" placeholder="cfut_sZDYP9JiINPXoydea1..." 
+              class="w-full bg-slate-900 border border-slate-800 rounded-xl pl-10 pr-4 py-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-500 transition">
+          </div>
+          <span class="text-[11px] text-slate-500 mt-1 block"><i class="fa-solid fa-info-circle"></i> "cfut_" ဖြင့်စတင်သော ရှည်လျားသော API Token ကို ထည့်ပါ။</span>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-slate-400 mb-2">Cloudflare Zone ID</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-500">
+              <i class="fa-solid fa-globe"></i>
+            </span>
+            <input type="text" id="zoneId" placeholder="d7f34c80eae228bbb560865e535d6c42" 
+              class="w-full bg-slate-900 border border-slate-800 rounded-xl pl-10 pr-4 py-3 text-slate-100 placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-orange-500 transition">
+          </div>
+          <span class="text-[11px] text-slate-500 mt-1 block"><i class="fa-solid fa-info-circle"></i> သင့် Domain ၏ Overview တွင်ရှိသော Zone ID (ဂဏန်း/စာလုံးရောနှော) ကို ထည့်ပါ။ ("cfut_" မဟုတ်ပါ)</span>
+        </div>
+      </div>
+      
+      <div class="mt-6 flex flex-col sm:flex-row gap-4 justify-between items-center border-t border-slate-800/60 pt-4">
+        <p class="text-xs text-slate-500"><i class="fa-solid fa-lock text-emerald-500 mr-1"></i> ဤအချက်အလက်များကို သင့် Browser ၏ Local Storage တွင် လုံခြုံစွာ အမြဲသိမ်းဆည်းထားပါမည်။</p>
+        <div class="flex gap-3 w-full sm:w-auto">
+          <!-- အချက်အလက်များ ပြန်ဖျက်ရန် ခလုတ် -->
+          <button onclick="clearSavedCredentials()" class="w-1/2 sm:w-auto bg-slate-800 hover:bg-slate-700 text-rose-400 hover:text-rose-300 font-medium px-4 py-3 rounded-xl border border-slate-700 transition transform active:scale-95 flex items-center justify-center gap-2 text-sm">
+            <i class="fa-solid fa-trash-can"></i> Clear Saved
+          </button>
+          <!-- ချိတ်ဆက်ရန် ခလုတ် -->
+          <button onclick="saveAndFetch()" class="w-1/2 sm:w-auto bg-gradient-to-r from-orange-500 to-amber-500 hover:from-orange-600 hover:to-amber-600 text-white font-semibold px-6 py-3 rounded-xl shadow-lg shadow-orange-500/20 transition transform active:scale-95 flex items-center justify-center gap-2 text-sm">
+            <i class="fa-solid fa-rotate"></i> ချိတ်ဆက်မည်
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- Feedback Banner / Status Message -->
     <div id="statusMessage" class="hidden mb-6 p-4 rounded-xl text-sm flex items-center gap-3"></div>
 
-    <!-- Main Workspace -->
-    <div id="workspace" class="transition-opacity duration-300">
+    <!-- Main Workspace (ချိတ်ဆက်ပြီးမှ ပေါ်လာမည်ဖြစ်ပြီး မချိတ်ဆက်မီ အရောင်မှိန်ထားမည်) -->
+    <div id="workspace" class="opacity-40 pointer-events-none transition-opacity duration-300">
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
         <!-- Left: Add/Edit Record Form -->
@@ -175,7 +226,7 @@
 
               <!-- Submit Button -->
               <button type="submit" id="submitBtn" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-3 rounded-xl transition duration-150 flex items-center justify-center gap-2">
-                <i class="fa-solid fa-floppy-disk"></i> သိည်းဆည်းမည်
+                <i class="fa-solid fa-floppy-disk"></i> သိမ်းဆည်းမည်
               </button>
             </form>
           </div>
@@ -184,7 +235,7 @@
         <!-- Right: DNS Records Table/List -->
         <div class="lg:col-span-2 space-y-4">
           
-          <!-- Search & Filter Area (ရှာဖွေရေးနေရာ) -->
+          <!-- Search & Filter Area -->
           <div class="bg-slate-950 border border-slate-800 rounded-2xl p-4 shadow-xl flex flex-col md:flex-row gap-4 items-center justify-between">
             <!-- Search Input Box -->
             <div class="relative w-full md:max-w-md">
@@ -263,34 +314,74 @@
 
   <!-- JavaScript App Logic -->
   <script {csp-guard}>
-    // Credentials (ပြောင်းလဲခြင်းမရှိပါ)
-    const CREDENTIALS = {
-      workerUrl: "https://daniyalasat.daniyalasat2006.workers.dev",
-      apiToken: "cfut_sZDYP9JiINPXoydea1uJdMZYorbtl6gQm34cIlMj5e9bf5e6",
-      zoneId: "d7f34c80eae228bbb560865e535d6c42"
-    };
-
+    const WORKER_URL = "https://daniyalasat.daniyalasat2006.workers.dev";
     let dnsRecords = [];
 
-    // Page စဖွင့်တာနဲ့ DNS Records များကို တန်းဆွဲယူမည်
+    // Browser cache (localStorage) မှ saved credentials များကို အလိုအလျောက် ပြန်ဆွဲယူမည်
     window.onload = function() {
       adjustFormFields();
-      setTimeout(() => {
+      
+      const storedToken = localStorage.getItem('cf_api_token');
+      const storedZoneId = localStorage.getItem('cf_zone_id');
+      
+      if (storedToken && storedZoneId) {
+        document.getElementById('apiToken').value = storedToken;
+        document.getElementById('zoneId').value = storedZoneId;
+        // Saved ထားတာရှိလျှင် အလိုအလျောက် DNS list ဆွဲယူရန်
         fetchDnsRecords();
-      }, 500);
+      }
     }
 
-    // API ကနေ ရရှိတဲ့ records တွေထဲက တကယ့် Zone Domain Name (eg. xxx.com) ကို Dynamic ထုတ်ယူမည့်စနစ်
+    // ချိတ်ဆက်မှု အချက်အလက်များကို localStorage တွင် သိမ်းဆည်းပြီး ဒေတာဆွဲယူခြင်း
+    function saveAndFetch() {
+      const token = document.getElementById('apiToken').value.trim();
+      const zoneId = document.getElementById('zoneId').value.trim();
+
+      if (!token || !zoneId) {
+        triggerToast("ကျေးဇူးပြု၍ API Token နှင့် Zone ID တို့ကို ထည့်သွင်းပေးပါ!", "error");
+        return;
+      }
+
+      // Local Storage ထဲတွင် လုံခြုံစွာ သိမ်းဆည်းထားလိုက်ပါပြီ
+      localStorage.setItem('cf_api_token', token);
+      localStorage.setItem('cf_zone_id', zoneId);
+
+      fetchDnsRecords();
+    }
+
+    // Saved ထားသော API Key များကို Browser မှ အပြီးသတ်ဖျက်ပစ်ရန်
+    function clearSavedCredentials() {
+      if (confirm("သိမ်းဆည်းထားသော API Token နှင့် Zone ID တို့ကို ဖျက်ပစ်ရန် သေချာပါသလား?")) {
+        localStorage.removeItem('cf_api_token');
+        localStorage.removeItem('cf_zone_id');
+        document.getElementById('apiToken').value = "";
+        document.getElementById('zoneId').value = "";
+        
+        // UI အား Lock ပြန်လုပ်ပြီး Reset ချရန်
+        const workspace = document.getElementById('workspace');
+        const connDot = document.getElementById('connectionDot');
+        const connText = document.getElementById('connectionText');
+        
+        workspace.classList.add('opacity-40', 'pointer-events-none');
+        connDot.className = "w-2 h-2 rounded-full bg-slate-500 animate-pulse";
+        connText.innerText = "API Offline";
+        
+        dnsRecords = [];
+        displayRecords();
+        triggerToast("သိမ်းဆည်းထားသော အချက်အလက်များ ဖျက်ဆီးပြီးပါပြီ။", "success");
+      }
+    }
+
+    // Dynamic Domain Suffix Detection (တကယ့် Domain ကို Auto တွက်ထုတ်ခြင်း)
     function getZoneDomainName() {
       if (dnsRecords && dnsRecords.length > 0) {
-        // record တစ်ခုစီတိုင်းမှာ zone_name ပါဝင်သောကြောင့် ၎င်းကို အလိုအလျောက် ယူပါမည်
         const found = dnsRecords.find(r => r.zone_name);
         if (found) return found.zone_name.trim();
       }
       return ""; 
     }
 
-    // User ရိုက်လိုက်တဲ့ name ကို domain suffix အပြည့်အစုံနဲ့ ပေါင်းပေးမည့်စနစ်
+    // Hostname အပြည့်အစုံကို domain suffix ဖြင့် ပေါင်းစပ်ခြင်း
     function getFullHostname(enteredName) {
       const zoneDomain = getZoneDomainName();
       if (!zoneDomain) return enteredName; 
@@ -301,7 +392,6 @@
         return zoneDomain;
       }
       
-      // domain suffix ပါပြီးသားဖြစ်နေရင် ထပ်မပေါင်းတော့ပါ
       if (trimmedName.endsWith(zoneDomain)) {
         return trimmedName;
       }
@@ -309,16 +399,14 @@
       return `${trimmedName}.${zoneDomain}`;
     }
 
-    // Success Center Modal ကို ဖွင့်ပြီး IP, Hostname ပြသပေးသည့် စနစ်
+    // Success Center Modal ကို ဖွင့်လှစ်ပြသခြင်း
     function openSuccessModal(title, ip, hostname) {
       document.getElementById('modalTitle').innerText = title + " ✔";
       document.getElementById('modalIp').innerText = ip;
       
-      // Domain Suffix ပါဝင်သော full hostname ကို တွက်ချက်မည်
       const fullHost = getFullHostname(hostname);
       document.getElementById('modalHostname').innerText = fullHost;
 
-      // Copy buttons binding
       document.getElementById('modalIpCopyBtn').onclick = function() {
         copyToClipboard(ip, "IP Address");
       };
@@ -337,7 +425,7 @@
       }, 50);
     }
 
-    // Modal ပြန်ပိတ်ရန်
+    // Modal ပိတ်ခြင်း
     function closeSuccessModal() {
       const modal = document.getElementById('successModal');
       const card = document.getElementById('modalCard');
@@ -350,7 +438,7 @@
       }, 150);
     }
 
-    // Simple Toast Alert System (Error သို့မဟုတ် Copy Information များပြသရန်)
+    // Toast Alert
     function triggerToast(message, type = 'success') {
       const container = document.getElementById('toastContainer');
       const toast = document.createElement('div');
@@ -371,12 +459,10 @@
       
       container.appendChild(toast);
       
-      // Animation effect
       setTimeout(() => {
         toast.classList.remove('translate-y-2', 'opacity-0');
       }, 10);
       
-      // Auto-remove
       setTimeout(() => {
         toast.classList.add('translate-y-2', 'opacity-0');
         setTimeout(() => {
@@ -385,7 +471,7 @@
       }, 4000);
     }
 
-    // Clipboard Copy Helper Function
+    // Copy to Clipboard
     function copyToClipboard(text, fieldName) {
       const tempInput = document.createElement("input");
       tempInput.value = text;
@@ -400,30 +486,36 @@
           triggerToast("ကူးယူရန် အဆင်မပြေဖြစ်သွားပါသည်။", 'error');
         }
       } catch (err) {
-        triggerToast("Browser control ကြောင့် ကူးယူ၍မရပါ။", 'error');
+        triggerToast("Browser Control ကြောင့် ကူးယူ၍မရပါ။", 'error');
       }
       
       document.body.removeChild(tempInput);
     }
 
-    // DNS Records ဆွဲယူခြင်း
+    // DNS Records ဆွဲယူခြင်း (တကယ့် API Keys များကို Header သို့ လှမ်းပို့သည်)
     async function fetchDnsRecords() {
+      const apiToken = localStorage.getItem('cf_api_token') || '';
+      const zoneId = localStorage.getItem('cf_zone_id') || '';
+
+      if (!apiToken || !zoneId) return;
+
       const workspace = document.getElementById('workspace');
       const loader = document.getElementById('loadingState');
       const tableBody = document.getElementById('dnsTableBody');
       const emptyState = document.getElementById('emptyState');
+      const connDot = document.getElementById('connectionDot');
+      const connText = document.getElementById('connectionText');
 
       loader.classList.remove('hidden');
       tableBody.innerHTML = '';
       emptyState.classList.add('hidden');
-      workspace.classList.add('opacity-50', 'pointer-events-none');
 
       try {
-        const response = await fetch(`${CREDENTIALS.workerUrl}/records`, {
+        const response = await fetch(`${WORKER_URL}/records`, {
           method: 'GET',
           headers: {
-            'Authorization': `Bearer ${CREDENTIALS.apiToken}`,
-            'X-Zone-Id': CREDENTIALS.zoneId,
+            'Authorization': `Bearer ${apiToken}`,
+            'X-Zone-Id': zoneId,
             'Content-Type': 'application/json'
           }
         });
@@ -432,7 +524,12 @@
 
         if (response.ok && result.success) {
           dnsRecords = result.result;
-          workspace.classList.remove('opacity-50', 'pointer-events-none');
+          
+          // UI Connection Active ပြောင်းလဲရန်
+          workspace.classList.remove('opacity-40', 'pointer-events-none');
+          connDot.className = "w-2 h-2 rounded-full bg-emerald-500 animate-pulse";
+          connText.innerText = "Cloudflare API Active";
+          
           displayRecords();
           showStatus('ချိတ်ဆက်မှု အောင်မြင်ပြီး DNS Records များ ဆွဲယူပြီးပါပြီ။', 'success');
         } else {
@@ -443,15 +540,21 @@
             errMsg = result.errors.map(e => `[Error ${e.code}] ${e.message}`).join('<br>');
           }
           showStatus(errMsg, 'error');
+          workspace.classList.add('opacity-40', 'pointer-events-none');
+          connDot.className = "w-2 h-2 rounded-full bg-rose-500";
+          connText.innerText = "API Error";
         }
       } catch (err) {
         showStatus(`Network Error: Worker API သို့ ချိတ်ဆက်မရပါ။ (အသေးစိတ်: ${err.message})`, 'error');
+        workspace.classList.add('opacity-40', 'pointer-events-none');
+        connDot.className = "w-2 h-2 rounded-full bg-rose-500";
+        connText.innerText = "API Offline";
       } finally {
         loader.classList.add('hidden');
       }
     }
 
-    // Table တွင် ဒေတာများ ပြသခြင်း (Search Filter System အပြည့်အစုံ)
+    // Table Display
     function displayRecords() {
       const tableBody = document.getElementById('dnsTableBody');
       const emptyState = document.getElementById('emptyState');
@@ -480,7 +583,6 @@
         const row = document.createElement('tr');
         row.className = 'hover:bg-slate-900/60 transition';
         
-        // Cloud White Icon စနစ် (Proxied ဖြစ်လျှင် လိမ္မော်ရောင်၊ DNS Only ဖြစ်လျှင် အဖြူရောင် Cloud)
         let proxyBadge = '';
         if (record.proxied) {
           proxyBadge = `
@@ -533,7 +635,6 @@
       });
     }
 
-    // Badge Color Helper
     function getTypeBadgeColor(type) {
       switch (type) {
         case 'A': return 'bg-blue-500/10 text-blue-400 border border-blue-500/20';
@@ -545,7 +646,6 @@
       }
     }
 
-    // Dynamic field adjustments based on Record Type
     function adjustFormFields() {
       const type = document.getElementById('recordType').value;
       const contentLabel = document.getElementById('contentLabel');
@@ -587,10 +687,18 @@
       }
     }
 
-    // DNS Record အသစ်ဖန်တီးခြင်း သို့မဟုတ် ပြင်ဆင်ခြင်း
+    // Handle Form Submit
     async function handleFormSubmit(event) {
       event.preventDefault();
       
+      const apiToken = localStorage.getItem('cf_api_token') || '';
+      const zoneId = localStorage.getItem('cf_zone_id') || '';
+
+      if (!apiToken || !zoneId) {
+        triggerToast("ချိတ်ဆက်မှု ပြတ်တောက်သွားပါသည်!", "error");
+        return;
+      }
+
       const recordId = document.getElementById('editRecordId').value;
       const type = document.getElementById('recordType').value;
       const name = document.getElementById('recordName').value.trim();
@@ -614,15 +722,15 @@
       }
 
       const isEdit = recordId !== "";
-      const endpoint = isEdit ? `${CREDENTIALS.workerUrl}/records/${recordId}` : `${CREDENTIALS.workerUrl}/records`;
+      const endpoint = isEdit ? `${WORKER_URL}/records/${recordId}` : `${WORKER_URL}/records`;
       const method = isEdit ? 'PUT' : 'POST';
 
       try {
         const response = await fetch(endpoint, {
           method: method,
           headers: {
-            'Authorization': `Bearer ${CREDENTIALS.apiToken}`,
-            'X-Zone-Id': CREDENTIALS.zoneId,
+            'Authorization': `Bearer ${apiToken}`,
+            'X-Zone-Id': zoneId,
             'Content-Type': 'application/json'
           },
           body: JSON.stringify(payload)
@@ -633,7 +741,6 @@
         if (response.ok && (result.success || !result.error)) {
           const titleMsg = isEdit ? "Update DNS Successfully" : "Create DNS Successfully";
           
-          // Cloudflare API ကနေ ပြန်လာတဲ့ record name အစစ်အမှန်ကို တိုက်ရိုက်ယူပြပါမယ်
           const actualHostname = (result.result && result.result.name) ? result.result.name : name;
           const actualIp = (result.result && result.result.content) ? result.result.content : content;
           
@@ -655,16 +762,21 @@
       }
     }
 
-    // Record ဖျက်ပစ်ခြင်း
+    // Delete Record
     async function deleteRecord(recordId) {
       if (!confirm('ဤ DNS Record ကို ဧကန်မုချ ဖျက်ရန် သေချာပါသလား?')) return;
 
+      const apiToken = localStorage.getItem('cf_api_token') || '';
+      const zoneId = localStorage.getItem('cf_zone_id') || '';
+
+      if (!apiToken || !zoneId) return;
+
       try {
-        const response = await fetch(`${CREDENTIALS.workerUrl}/records/${recordId}`, {
+        const response = await fetch(`${WORKER_URL}/records/${recordId}`, {
           method: 'DELETE',
           headers: {
-            'Authorization': `Bearer ${CREDENTIALS.apiToken}`,
-            'X-Zone-Id': CREDENTIALS.zoneId
+            'Authorization': `Bearer ${apiToken}`,
+            'X-Zone-Id': zoneId
           }
         });
 
@@ -687,7 +799,7 @@
       }
     }
 
-    // Edit ရန် ဒေတာများ ဖြည့်သွင်းခြင်း
+    // Edit Form Binding
     function editRecord(id) {
       const record = dnsRecords.find(r => r.id === id);
       if (!record) return;
@@ -714,7 +826,7 @@
       document.getElementById('dnsForm').scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Reset Form ပြုလုပ်ခြင်း
+    // Reset Form
     function resetForm() {
       document.getElementById('editRecordId').value = "";
       document.getElementById('dnsForm').reset();
@@ -724,7 +836,7 @@
       adjustFormFields();
     }
 
-    // Header Status Message ပြသရန်
+    // Show Status Banner
     function showStatus(message, type) {
       const statusBox = document.getElementById('statusMessage');
       statusBox.classList.remove('hidden', 'bg-emerald-500/10', 'text-emerald-400', 'border-emerald-500/20', 'bg-red-500/10', 'text-red-400', 'border-red-500/20');
@@ -741,3 +853,4 @@
 </body>
 </html>
 
+```
