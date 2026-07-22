@@ -1,0 +1,306 @@
+```html
+<!DOCTYPE html>
+<html lang="my">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eagle Flash VPN - ဒေါင်းလုဒ်ပြုလုပ်ရန်</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts (Padauk for Myanmar text) -->
+    <link href="https://fonts.googleapis.com/css2?family=Padauk:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Padauk', 'Inter', sans-serif;
+            background-color: #f0f7ff;
+        }
+        .dtac-blue {
+            color: #00A3E0;
+        }
+        .bg-dtac-blue {
+            background-color: #00A3E0;
+        }
+        .bg-dtac-gradient {
+            background: linear-gradient(135deg, #00A3E0 0%, #005691 100%);
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Header Section -->
+    <header class="bg-white shadow-sm border-b border-gray-100 sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 rounded-full bg-dtac-gradient flex items-center justify-center text-white text-xl font-bold shadow">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <span class="text-xl font-bold text-gray-900 tracking-wide">Eagle Flash <span class="text-xs bg-blue-100 text-blue-800 font-semibold px-2 py-0.5 rounded-full">v1.0.0</span></span>
+            </div>
+            <!-- DTAC Logo Branding -->
+            <div class="flex items-center space-x-1.5 font-bold text-dtac-blue bg-blue-50 px-3 py-1.5 rounded-full border border-blue-100">
+                <i class="fa-solid fa-signal text-sm"></i>
+                <span class="text-lg italic font-black uppercase tracking-tighter" style="color: #00a3e0;">dtac</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 py-8 flex-grow w-full">
+
+        <!-- App Download Hero Section -->
+        <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl border border-blue-50 mb-10 text-center relative overflow-hidden">
+            <div class="absolute -top-10 -right-10 w-40 h-40 bg-blue-100 rounded-full blur-2xl opacity-50"></div>
+            
+            <div class="inline-block p-4 bg-blue-50 rounded-2xl mb-4 text-blue-600 shadow-inner">
+                <i class="fa-solid fa-shield-halved text-5xl md:text-6xl text-dtac-blue"></i>
+            </div>
+            
+            <h1 class="text-2xl md:text-4xl font-bold text-gray-900 mb-2">Eagle Flash VPN</h1>
+            <p class="text-gray-600 max-w-md mx-auto mb-6 text-sm md:text-base">မြန်ဆန်ပြီး စိတ်ချရသော VPN ဝန်ဆောင်မှု။ DTAC အင်တာနက် ပရိုမိုးရှင်းများနှင့် အလွယ်တကူ အသုံးပြုနိုင်ပါသည်။</p>
+
+            <!-- Download Button -->
+            <a href="https://github.com/ThandarLin2026/Eagle-Flash/releases/download/Eagle_Flash_1.0.0/Eagle.Flash_1.0.0.apk" 
+               class="inline-flex items-center justify-center gap-3 bg-dtac-gradient hover:opacity-95 text-white font-bold py-4 px-8 rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 w-full sm:w-auto text-lg">
+                <i class="fa-solid fa-download text-xl"></i>
+                <span>APK ဒေါင်းလုဒ်ဆွဲရန် (v1.0.0)</span>
+            </a>
+
+            <div class="mt-4 flex items-center justify-center gap-4 text-xs text-gray-500">
+                <span><i class="fa-brands fa-android text-green-500 mr-1"></i> Android သီးသန့်</span>
+                <span>•</span>
+                <span><i class="fa-solid fa-check-circle text-blue-500 mr-1"></i> Safe & Secure</span>
+            </div>
+        </div>
+
+        <!-- DTAC NoPro Price Section -->
+        <div class="mb-10">
+            <div class="text-center mb-6">
+                <span class="bg-blue-100 text-dtac-blue text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full inline-flex items-center gap-1.5">
+                    <i class="fa-solid fa-sim-card"></i> DTAC Special Plans
+                </span>
+                <h2 class="text-2xl font-bold text-gray-900 mt-2">DTAC NOPRO PRICE ပလန်များ</h2>
+                <p class="text-sm text-gray-600">မိမိနှစ်သက်ရာ အင်တာနက် ပလန်ကို ရွေးချယ်ပါ</p>
+            </div>
+
+            <!-- Pricing Cards Grid -->
+            <div class="grid md:grid-cols-2 gap-6">
+
+                <!-- Normal Plan -->
+                <div class="bg-white rounded-3xl shadow-md hover:shadow-lg transition-shadow border border-gray-100 p-6 flex flex-col justify-between relative overflow-hidden">
+                    <div class="top-0 right-0 absolute bg-gray-200 text-gray-700 text-xs font-bold px-3 py-1 rounded-bl-xl flex items-center gap-1">
+                        <i class="fa-solid fa-tag text-xs"></i> NORMAL PLAN
+                    </div>
+                    <div>
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="w-12 h-12 rounded-2xl bg-blue-50 text-dtac-blue flex items-center justify-center text-2xl font-bold border border-blue-100">
+                                <i class="fa-solid fa-gauge-high"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800">Normal Plan</h3>
+                                <p class="text-xs text-gray-500">ပုံမှန် အသုံးပြုသူများအတွက်</p>
+                            </div>
+                        </div>
+
+                        <div class="my-6 bg-blue-50/50 p-4 rounded-2xl border border-blue-50 text-center">
+                            <div class="flex items-baseline justify-center gap-1">
+                                <span class="text-4xl font-extrabold text-gray-900">70</span>
+                                <span class="text-lg font-bold text-gray-600">THB</span>
+                                <span class="text-xs text-gray-400">/ ၁ လ</span>
+                            </div>
+                        </div>
+
+                        <!-- Features -->
+                        <ul class="space-y-3 mb-6 text-sm text-gray-600">
+                            <li class="flex items-center gap-2.5">
+                                <i class="fa-solid fa-database text-blue-500 bg-blue-50 p-1.5 rounded-lg text-xs"></i>
+                                <span>အင်တာနက် ပမာဏ: <strong class="text-gray-800">200 GB</strong></span>
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <i class="fa-solid fa-calendar-days text-blue-500 bg-blue-50 p-1.5 rounded-lg text-xs"></i>
+                                <span>သက်တမ်း: <strong class="text-gray-800">1 MONTH (၁ လ)</strong></span>
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <i class="fa-solid fa-bolt text-blue-500 bg-blue-50 p-1.5 rounded-lg text-xs"></i>
+                                <span>Eagle Flash VPN နှင့် တွဲဖက်သုံးနိုင်သည်</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <a href="https://github.com/ThandarLin2026/Eagle-Flash/releases/download/Eagle_Flash_1.0.0/Eagle.Flash_1.0.0.apk" class="w-full text-center bg-gray-100 hover:bg-gray-200 text-gray-800 font-bold py-3.5 rounded-2xl transition-colors flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cart-shopping text-sm"></i>
+                        <span>ရွေးချယ်မည်</span>
+                    </a>
+                </div>
+
+                <!-- Special Plan -->
+                <div class="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition-shadow border-2 border-dtac-blue p-6 flex flex-col justify-between relative overflow-hidden">
+                    <div class="top-0 right-0 absolute bg-dtac-blue text-white text-xs font-bold px-4 py-1 rounded-bl-xl shadow-sm flex items-center gap-1">
+                        <i class="fa-solid fa-crown text-yellow-300 text-xs"></i> SPECIAL PLAN
+                    </div>
+                    <div>
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="w-12 h-12 rounded-2xl bg-dtac-gradient text-white flex items-center justify-center text-2xl font-bold shadow">
+                                <i class="fa-solid fa-infinity"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-800">Special Plan</h3>
+                                <p class="text-xs text-gray-500">အကန့်အသတ်မရှိ သုံးလိုသူများအတွက်</p>
+                            </div>
+                        </div>
+
+                        <div class="my-6 bg-gradient-to-r from-blue-50 to-sky-50 p-4 rounded-2xl border border-blue-100 text-center">
+                            <div class="flex items-baseline justify-center gap-1">
+                                <span class="text-4xl font-extrabold text-dtac-blue">100</span>
+                                <span class="text-lg font-bold text-gray-600">THB</span>
+                                <span class="text-xs text-gray-400">/ ၁ လ</span>
+                            </div>
+                        </div>
+
+                        <!-- Features -->
+                        <ul class="space-y-3 mb-6 text-sm text-gray-600">
+                            <li class="flex items-center gap-2.5">
+                                <i class="fa-solid fa-wifi text-dtac-blue bg-blue-100 p-1.5 rounded-lg text-xs"></i>
+                                <span>အင်တာနက် ပမာဏ: <strong class="text-gray-800">Unlimited GB (အကန့်အသတ်မရှိ)</strong></span>
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <i class="fa-solid fa-calendar-check text-dtac-blue bg-blue-100 p-1.5 rounded-lg text-xs"></i>
+                                <span>သက်တမ်း: <strong class="text-gray-800">1 MONTH (၁ လ)</strong></span>
+                            </li>
+                            <li class="flex items-center gap-2.5">
+                                <i class="fa-solid fa-rocket text-dtac-blue bg-blue-100 p-1.5 rounded-lg text-xs"></i>
+                                <span>High Speed VPN Connection</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <a href="https://github.com/ThandarLin2026/Eagle-Flash/releases/download/Eagle_Flash_1.0.0/Eagle.Flash_1.0.0.apk" class="w-full text-center bg-dtac-gradient hover:opacity-90 text-white font-bold py-3.5 rounded-2xl shadow transition-opacity flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cart-shopping text-sm"></i>
+                        <span>ရွေးချယ်မည်</span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Instructions/Features Section -->
+        <div class="bg-white rounded-3xl p-6 md:p-8 shadow-md border border-gray-100">
+            <div class="flex items-center space-x-3 mb-6 border-b border-gray-100 pb-4">
+                <div class="w-10 h-10 rounded-xl bg-blue-100 text-dtac-blue flex items-center justify-center text-xl">
+                    <i class="fa-solid fa-list-check"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-gray-900">အသုံးပြုနည်း လမ်းညွှန်</h3>
+                    <p class="text-xs text-gray-500">VPN အသုံးပြုရန် အောက်ပါ အဆင့်များကို အစဉ်လိုက် လုပ်ဆောင်ပါ</p>
+                </div>
+            </div>
+
+            <!-- Steps Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                
+                <!-- Step 1 -->
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:bg-blue-50/50 transition-colors">
+                    <div class="w-8 h-8 rounded-full bg-dtac-blue text-white flex-shrink-0 flex items-center justify-center font-bold text-sm shadow">
+                        ၁
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-sm md:text-base flex items-center gap-2">
+                            <i class="fa-solid fa-download text-dtac-blue"></i> APK ကို ဒေါင်းလုတ်ဆွဲပါ
+                        </h4>
+                        <p class="text-xs text-gray-600 mt-1">အထက်ပါ APK ဒေါင်းလုဒ် ခလုတ်ကို နှိပ်၍ ဖုန်းထဲသို့ ဒေါင်းလုဒ်ရယူပါ။</p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:bg-blue-50/50 transition-colors">
+                    <div class="w-8 h-8 rounded-full bg-dtac-blue text-white flex-shrink-0 flex items-center justify-center font-bold text-sm shadow">
+                        ၂
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-sm md:text-base flex items-center gap-2">
+                            <i class="fa-solid fa-mobile-screen-button text-dtac-blue"></i> APK ထဲဝင်ပါ
+                        </h4>
+                        <p class="text-xs text-gray-600 mt-1">အက်ပလီကေးရှင်းကို Install လုပ်ပြီး ဖွင့်ပါ။ <span class="text-blue-600 font-semibold">(အင်တာနက်ခဏလိုမည်)</span></p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:bg-blue-50/50 transition-colors">
+                    <div class="w-8 h-8 rounded-full bg-dtac-blue text-white flex-shrink-0 flex items-center justify-center font-bold text-sm shadow">
+                        ၃
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-sm md:text-base flex items-center gap-2">
+                            <i class="fa-solid fa-bars text-dtac-blue"></i> မျဉ်းသုံးကြောင်းကို နှိပ်ပါ
+                        </h4>
+                        <p class="text-xs text-gray-600 mt-1">အက်ပလီကေးရှင်း၏ ဘယ်ဘက်ထိပ်ရှိ မျဉ်းသုံးကြောင်း (Menu) ထဲသို့ ဝင်ပါ။</p>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:bg-blue-50/50 transition-colors">
+                    <div class="w-8 h-8 rounded-full bg-dtac-blue text-white flex-shrink-0 flex items-center justify-center font-bold text-sm shadow">
+                        ၄
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-sm md:text-base flex items-center gap-2">
+                            <i class="fa-solid fa-id-card text-dtac-blue"></i> Membership ကို နှိပ်ပါ
+                        </h4>
+                        <p class="text-xs text-gray-600 mt-1">Menu ထဲမှ Membership ဆိုသော အချက်အလက်နေရာကို နှိပ်ပါ။</p>
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:bg-blue-50/50 transition-colors">
+                    <div class="w-8 h-8 rounded-full bg-dtac-blue text-white flex-shrink-0 flex items-center justify-center font-bold text-sm shadow">
+                        ၅
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-sm md:text-base flex items-center gap-2">
+                            <i class="fa-solid fa-copy text-dtac-blue"></i> Device ID ကို Copy ယူ ပို့ပေးပါ
+                        </h4>
+                        <p class="text-xs text-gray-600 mt-1">ပေါ်လာသော Device ID ကို Copy ယူ၍ အက်ဒမင်ထံ သို့ ပို့ပေးပါ။</p>
+                    </div>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="flex items-start gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:bg-blue-50/50 transition-colors">
+                    <div class="w-8 h-8 rounded-full bg-dtac-blue text-white flex-shrink-0 flex items-center justify-center font-bold text-sm shadow">
+                        ၆
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-sm md:text-base flex items-center gap-2">
+                            <i class="fa-solid fa-right-to-bracket text-dtac-blue"></i> Login နှိပ်ပါ
+                        </h4>
+                        <p class="text-xs text-gray-600 mt-1">Admin က ရပြီဟု အကြောင်းပြန်လျှင် ညာဘက်ထိပ်ရှိ Login ကို နှိပ်၍ စတင်သုံးစွဲပါ။</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Important Note Callout -->
+            <div class="bg-amber-50 border-l-4 border-amber-400 p-4 rounded-r-2xl flex items-center gap-3">
+                <i class="fa-solid fa-triangle-exclamation text-amber-500 text-xl flex-shrink-0"></i>
+                <div>
+                    <h5 class="font-bold text-amber-800 text-sm">အရေးကြီး မှတ်ချက်</h5>
+                    <p class="text-xs text-amber-700">အက်ပလီကေးရှင်း အကောင့်ဖွင့်ချိန်နှင့် စတင်ချိတ်ဆက်ချိန်တွင် အင်တာနက် ခဏရှိနေရပါမည်။</p>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-10 py-6">
+        <div class="max-w-4xl mx-auto px-4 text-center text-xs text-gray-500 space-y-2">
+            <p>© 2026 Eagle Flash VPN. All rights reserved.</p>
+            <p class="text-gray-400">DTAC ၏ ကွန်ရက်များနှင့် အလွယ်တကူ ချိတ်ဆက် အသုံးပြုနိုင်ပါသည်။</p>
+        </div>
+    </footer>
+
+</body>
+</html>
+
+```
